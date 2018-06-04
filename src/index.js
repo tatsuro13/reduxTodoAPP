@@ -7,9 +7,12 @@
 // ReactDOM.render(<App />, document.getElementById('root'));
 // registerServiceWorker();
 
+import {createStore} from 'redux';
+
 const initialState = {
   tasks: []
 }
+
  function tasksReducer(state = initialState, action){
    switch (action.type) {
      case 'ADD_TASK':
@@ -22,3 +25,12 @@ const initialState = {
      return state;
    }
  }
+
+const store = createStore(tasksReducer);
+
+const addTask = (task) => ({
+  type: 'ADD_TASK',
+  payload: {
+    task
+  }
+});
