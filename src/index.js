@@ -18,9 +18,8 @@ const initialState = {
      case 'ADD_TASK':
        return{
          ...state,
-         tasks: state.tasks.concat([action.task])
+         tasks: state.tasks.concat([action.payload.task])
        };
-       break;
      default:
      return state;
    }
@@ -28,9 +27,20 @@ const initialState = {
 
 const store = createStore(tasksReducer);
 
+function handleChange(){
+  console.log(store.getState());
+}
+
+const unsubscribe = store.subscribe(handleChange);
+//unsubscribe();
+
 const addTask = (task) => ({
   type: 'ADD_TASK',
   payload: {
     task
   }
 });
+
+console.log(store.getState());
+
+store.dispatch(addTask('Storeを学ぶ'));
